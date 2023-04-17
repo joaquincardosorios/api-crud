@@ -27,11 +27,39 @@ export const obtenerClientes = async () => {
     }
 }
 
+// Elimina un cliente por su ID
 export const eliminarCliente = async id => {
     try {
         const resultado = await fetch(`${url}/${id}`, {
             method: 'DELETE'
         });
+    } catch (error) {
+        console.log(error)
+    }
+}
+
+// Obtiene un cliente por su ID
+export const obtenerCliente = async id => {
+    try {
+        const resultado = await fetch(`${url}/${id}`);
+        const cliente = await resultado.json();
+        return cliente;
+    } catch (error) {
+        console.log(error)
+    }
+}
+
+// Actualiza un registro
+
+export const editarCliente = cliente =>{
+    try {
+        fetch(`${url}/${cliente.id}`,{
+            method:'PUT',
+            body: JSON.stringify(cliente),
+            headers: {
+                'Content-Type': 'application/json'
+            }
+        })
     } catch (error) {
         console.log(error)
     }
